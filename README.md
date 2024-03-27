@@ -1,8 +1,8 @@
 # Weather App
 
-<center>
-    <img src="app/favicon.ico">
-</center>
+<div align="center">
+<img src="app/favicon.ico">
+</div>
 
 <hr>
 
