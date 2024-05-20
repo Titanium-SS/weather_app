@@ -1,0 +1,28 @@
+{
+    "theme_color": "#f69435",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "name": "Weather Balloon",
+    "short_name": "Weather Balloon",
+    "description": "Weather App using Open Weather API",
+    "icons": [
+        {
+            "src": "icon-192x192.png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "icon-256x256.png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "icon-384x384.png",
+            "sizes": "384x384"
+        },
+        {
+            "src": "icon-512x512.png",
+            "sizes": "512x512"
+        }
+    ]
+}
