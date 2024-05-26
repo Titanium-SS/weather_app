@@ -117,7 +117,7 @@ export default function Home() {
         );
 
     return (
-        <div className="flex flex-col gap-4 bg-gray-300 min-h-screen">
+        <div className="flex flex-col gap-4 bg-gray-300 min-h-screen dark:bg-medium">
             <Navbar location={data?.city.name} />
             <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9 w-full pb-10 pt-4 ">
                 {/* today data */}
@@ -127,13 +127,13 @@ export default function Home() {
                     <>
                         <section className="space-y-4">
                             <div className="space-y-2">
-                                <h2 className="flex gap-1 text-2xl items-end">
+                                <h2 className="flex gap-1 text-2xl items-end dark:text-gray-200">
                                     <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p>
-                                    <p className="text-lg">({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")})</p>
+                                    <p className="text-lg dark:text-gray-200">({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")})</p>
                                 </h2>
                                 <Container className="gap-10 px-6 items-center">
                                     <div className="flex flex-col px-4">
-                                        <span className="text-5xl">
+                                        <span className="text-5xl ">
                                             {convertKelvinToCelcius(firstData?.main.temp ?? 0)}°
                                         </span>
                                         <p className="text-xs space-x-1 whitespace-nowrap">
@@ -178,7 +178,7 @@ export default function Home() {
                                         iconName={getDayOrNightIcon(firstData?.weather[0].icon ?? "", firstData?.dt_txt ?? "")}
                                     />
                                 </Container>
-                                <Container className="bg-blue-300/80 px-6 gap-4 justify-between overflow-x-auto">
+                                <Container className="bg-blue-400/80 px-6 gap-4 justify-between overflow-x-auto dark:bg-teal-400">
                                     <WeatherDetails
                                         visibility={metersToKilometers(firstData?.visibility ?? 100000)}
                                         humidity={`${firstData?.main.humidity} %`}
@@ -194,7 +194,7 @@ export default function Home() {
 
                         {/* upcoming days forecast data*/}
                         <section className="flex w-full flex-col gap-4">
-                            <p className="text-2xl">Forecast (days ahead)</p>
+                            <p className="text-2xl dark:text-gray-200">Forecast (days ahead)</p>
                             {firstDataForEachDate.map((d, i) => {
                                 const dateTxt = d?.dt_txt ?? "";
                                 if (!dateTxt) return null; // Skip invalid date
@@ -249,7 +249,7 @@ function WeatherSkeleton() {
                     {[1, 2, 3, 4].map((index) => (
                         <div key={index} className="flex flex-col items-center space-y-2">
                             <div className="h-6 w-16 bg-blue-300 rounded"></div>
-                            <div className="h-6 w-6 bg-blue-300 rounded-full"></div>
+                            <div className="h-6 w-16 bg-blue-300 rounded-full"></div>
                             <div className="h-6 w-16 bg-blue-300 rounded"></div>
                         </div>
                     ))}
@@ -264,7 +264,7 @@ function WeatherSkeleton() {
                 {[1, 2, 3, 4, 5, 6, 7].map((index) => (
                     <div key={index} className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="h-8 w-28 bg-blue-300 rounded"></div>
-                        <div className="h-8 w-8 bg-blue-300 rounded-full"></div>
+                        <div className="h-8 w-28 bg-blue-300 rounded-full"></div>
                         <div className="h-8 w-28 bg-blue-300 rounded"></div>
                         <div className="h-8 w-28 bg-blue-300 rounded"></div>
                     </div>

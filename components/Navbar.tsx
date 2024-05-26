@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import { loadingCityAtom, placeAtom } from "@/app/atom";
 import { useAtom } from "jotai";
+import ThemeToggle from "./ThemeToggle";
 
 type Props = { location?: string };
 
@@ -20,7 +21,7 @@ export default function Navbar({ location }: Props) {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [place, setPlace] = useAtom(placeAtom);
     const [_, setLoadingCity] = useAtom(loadingCityAtom);
-    const [darkMode, setDarkMode] = useState(false); // Added state for dark mode
+    const [darkMode, setDarkMode] = useState("");
 
     async function handleInputChange(value: string) {
         setCity(value);
@@ -85,22 +86,41 @@ export default function Navbar({ location }: Props) {
         }
     }
 
+    // function to change icon according to current mode (light or dark)
+
+    // function icon() {
+    //     const theme = localStorage.getItem("theme");
+        
+    //     console.log("Current theme:", theme);
+
+    //     if (theme === "dark") {
+    //         return <MdNightsStay className="text-3xl mt-1 text-gray-300" />;
+    //     } else {
+    //         return <MdWbSunny className="text-3xl mt-1 text-yellow-300" />;
+    //     }
+    // }
+
     return (
         <>
-            <nav className={`shadow-sm sticky top-0 left-0 z-50 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+            <nav className={`shadow-sm sticky top-0 left-0 z-50 bg-white dark:bg-dark`}>
                 <div className="h-[80px] w-full flex justify-between items-center max-w-7xl px-3 mx-auto">
-                    <p className="flex items-center justify-center gap-2 ">
-                        <h2 className={`text-3xl ${darkMode ? 'text-gray-300' : 'text-gray-500'}`}>Weather</h2>
-                        {darkMode ? <MdNightsStay className="text-3xl mt-1 text-gray-300" /> : <MdWbSunny className="text-3xl mt-1 text-yellow-300" />}
-                    </p>
-                    <section className="flex gap-2 items-center">
+                <div className="flex items-center justify-center gap-2 ">
+                <h2 className={`text-3xl text-gray-500 dark:text-teal-300`}>Weather</h2>
+                <h2 className={`text-3xl mt-1 text-yellow-300 dark:text-gray-300`}>
+                    <div className={darkMode ? 'dark:' : ''}>
+                        {darkMode ? <MdNightsStay /> : <MdWbSunny />}
+                    </div>
+                </h2>
+                </div>
+
+                    <section className="flex gap-3 items-center">
                         <MdMyLocation
                             title="Your Current Location"
                             onClick={handleCurrentLocation}
-                            className={`text-2xl ${darkMode ? 'text-gray-300' : 'text-gray-400'} hover:opacity-80 cursor-pointer`}
+                            className={`text-2xl text-gray-400 dark:text-gray-300} hover:opacity-80 cursor-pointer`}
                         />
-                        <MdOutlineLocationOn className={`text-3xl ${darkMode ? 'text-gray-300' : 'text-gray-500'}`} />
-                        <p className={`${darkMode ? 'text-gray-300' : 'text-slate-900/80'} text-sm`}> {location} </p>
+                        <MdOutlineLocationOn className={`text-3xl text-gray-500 dark:text-gray-300}`} />
+                        <p className={`text-slate-900/80 dark:text-slate-300 text-sm`}> {location} </p>
                         <div className="relative hidden md:flex">
                             <SearchBox
                                 value={city}
@@ -113,6 +133,9 @@ export default function Navbar({ location }: Props) {
                                 handleSuggestionClick={handleSuggestionClick}
                                 error={error}
                             />
+                            <div className="px-3 py-1 justify-end">
+                                <ThemeToggle />
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -131,10 +154,10 @@ export default function Navbar({ location }: Props) {
                         error={error}
                     />
                 </div>
+                <div className="flex flex-1 py-1 justify-end">
+                    <ThemeToggle />
+                </div>
             </section>
-            <button className="fixed bottom-4 right-4 bg-gray-800 p-2 rounded-full text-white" onClick={() => setDarkMode(!darkMode)}>
-                {darkMode ? "Light Mode" : "Dark Mode"}
-            </button>
         </>
     );
 }

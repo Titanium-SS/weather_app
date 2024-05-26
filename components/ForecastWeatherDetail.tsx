@@ -38,8 +38,6 @@ export default function ForecastWeatherDetail(props: ForecastWeatherDetailProps)
                     <p className='text-sm'>{day}</p>
                 </div>
 
-                {/** HHAAHHHHHH*/}
-
                 <div className='flex flex-col px-4'>
                     <span className='text-5xl'>{convertKelvinToCelcius(temp ?? 0)}°</span>
                     <p className='text-xs space-x-1 whitespace-nowrap'>
